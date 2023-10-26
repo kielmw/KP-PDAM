@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "116436689452",
+    "project_id": "pdam-delta-tirta",
+    "storage_bucket": "pdam-delta-tirta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116436689452:android:17e3f8151670abdb83e789",
+        "android_client_info": {
+          "package_name": "com.project.pdamdeltatirta"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ7vd-xKawbM135-sK1hVjkk_SbkjYK8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
