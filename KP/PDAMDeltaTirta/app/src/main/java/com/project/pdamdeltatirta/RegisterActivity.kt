@@ -1,6 +1,5 @@
 package com.project.pdamdeltatirta
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.text.SpannableString
@@ -10,11 +9,11 @@ import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.project.pdamdeltatirta.databinding.ActivityRegisterBinding
-import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -95,8 +94,24 @@ class RegisterActivity : AppCompatActivity() {
                                     "user_name" to name,
                                     "meter_bulan_ini" to "1034",
                                     "meter_bulan_lalu" to "1010",
-                                    "pemakaian_bulan_ini" to "30 M3",
+                                    "pemakaian_bulan_ini" to "24 M3",
                                 )
+
+                                val historyPembayaran = mapOf(
+                                    "user_id" to uid,
+                                    "use_name" to name,
+                                    "bulan_pembayaran" to "September",
+                                    "jumlah" to "Rp. 105.000,00" ,
+                                    "pesan" to "Silahkan lakukan pembayaran untuk bulan September !",
+                                    "status" to "Belum Dibayar",
+                                )
+
+                                FirebaseFirestore.getInstance()
+                                    .collection("transaction")
+                                    .document(uid)
+                                    .collection("bulan")
+                                    .document()
+                                    .set(historyPembayaran);
 
                                 FirebaseFirestore
                                     .getInstance()

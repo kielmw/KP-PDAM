@@ -51,10 +51,10 @@ class CekTagihanActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 customerId = it.data!!["customer_id"].toString()
 
-                if (customerId == "Belum Melakukan Pemasangan PDAM") {
+                if (!customerId.contains("PDAM-")) {
                     showWarningDialog(
                         "Prosedur Cek Tagihan",
-                        "Anda wajib melakukan pemasangan PDAM, pada menu Pasang Baru\n\nSetelah itu anda dapat melakukan cek tagihan"
+                        "1. Anda wajib melakukan pemasangan PDAM, pada menu Pasang Baru\n2. Pengajuan anda akan di tinjau terlebih dahulu\n3. Admin akan mengaktifasi pengajuan anda, dan PDAM Delta Tirta akan melakukan pemasangan PDAM\n\nSetelah itu anda dapat melakukan cek tagihan"
                     )
                 } else {
                    cekTagihanFromFirebase()

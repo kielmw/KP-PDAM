@@ -49,7 +49,7 @@ class HomeFragment : Fragment() {
             .addOnSuccessListener {
                 customerId = it.data!!["customer_id"].toString()
 
-                if (customerId != "Belum Melakukan Pemasangan PDAM") {
+                if (customerId.contains("PDAM-")) {
                     binding.notificationCounter.text = "6"
                 }
             }

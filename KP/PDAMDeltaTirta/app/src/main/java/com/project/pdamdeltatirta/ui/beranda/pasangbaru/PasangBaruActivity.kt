@@ -59,7 +59,7 @@ class PasangBaruActivity : AppCompatActivity() {
                 submitInstallationPDAMValidation()
             }
 
-           etJenisKelamin.setOnClickListener {
+            etJenisKelamin.setOnClickListener {
                 Log.e("adasada", "adsasad")
                 showOptionMenu("gender")
             }
@@ -109,7 +109,6 @@ class PasangBaruActivity : AppCompatActivity() {
                     val sumberAirLain = document.getString("sumber_air_lain")
 
                     binding.apply {
-                        notificationCounter.text = "6"
                         textView.text = "Pengajuan PDAM Anda"
                         btnSend.text = "Update Pengajuan"
                         etNamaPelanggan.setText(namaPelanggan)
@@ -132,10 +131,18 @@ class PasangBaruActivity : AppCompatActivity() {
                         etSumberAirLain.setText(sumberAirLain)
                     }
 
-                    showSuccessDialog(
-                        "Pemberitahuan Pasang Baru",
-                        "Anda sebelumnya sudah mengajukan pemasangan baru melalui apliaksi PDAM Delta Tirta Sidoarjo, dan sudah berhasil di aktivasi.\n\nKlik oke untuk melihat / memperbarui data pengajuan PDAM anda"
-                    )
+                    if (customerId.contains("PDAM-")) {
+                        binding.notificationCounter.text = "6"
+                        showSuccessDialog(
+                            "Pemberitahuan Pasang Baru",
+                            "Anda sebelumnya sudah mengajukan pemasangan baru melalui apliaksi PDAM Delta Tirta Sidoarjo, dan sudah berhasil di aktivasi.\n\nKlik oke untuk melihat / memperbarui data pengajuan PDAM anda"
+                        )
+                    } else {
+                        showSuccessDialog(
+                            "Pemberitahuan Pasang Baru",
+                            "Pengajuan pemasangan PDAM anda sendang dalam proses peninjauan oleh PDAM Delta Tirta Sidoarjo.\n\nKlik oke untuk melihat / memperbarui data pengajuan PDAM anda"
+                        )
+                    }
                 }
             }
     }
@@ -202,7 +209,7 @@ class PasangBaruActivity : AppCompatActivity() {
                 progressBar.visibility = View.VISIBLE
 
                 if (!isAlreadySubmitted) {
-                    val customerId = "PDAM-${System.currentTimeMillis()}"
+                    val customerId = "PB-${System.currentTimeMillis()}"
 
                     val data = mapOf(
                         "id_pelanggan" to uuid,
@@ -256,7 +263,6 @@ class PasangBaruActivity : AppCompatActivity() {
                                 showFailureDialog()
                             }
                         }
-
 
 
                 } else {

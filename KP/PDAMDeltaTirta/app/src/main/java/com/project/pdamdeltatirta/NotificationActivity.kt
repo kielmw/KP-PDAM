@@ -1,8 +1,8 @@
 package com.project.pdamdeltatirta
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.project.pdamdeltatirta.databinding.ActivityNotificationBinding
@@ -36,19 +36,21 @@ class NotificationActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 customerId = it.data!!["customer_id"].toString()
 
-                if (customerId == "Belum Melakukan Pemasangan PDAM") {
+                if (!customerId.contains("PDAM-")) {
                     binding.noData.visibility = View.VISIBLE
                 } else {
-                    binding.notificationWrapper.visibility = View.VISIBLE
                     getNotificationFromFirebase()
                 }
             }
     }
 
     private fun getNotificationFromFirebase() {
+        val uid = FirebaseAuth.getInstance().currentUser!!.uid
         FirebaseFirestore
             .getInstance()
             .collection("transaction")
+            .document(uid)
+            .collection("bulan")
             .get()
             .addOnSuccessListener { documents ->
                 documents.forEach {
@@ -68,22 +70,24 @@ class NotificationActivity : AppCompatActivity() {
             binding.apply {
                 when (index) {
                     0 -> {
+                        binding.notificationWrapper.visibility = View.VISIBLE
                         septemberNotification.text = data.pesan
                     }
                     1 -> {
+                        binding.notificationWrapper1.visibility = View.VISIBLE
                         augustNotification.text = data.pesan
                     }
                     2 -> {
+                        binding.notificationWrapper2.visibility = View.VISIBLE
                         julyNotification.text = data.pesan
                     }
                     3 -> {
+                        binding.notificationWrapper3.visibility = View.VISIBLE
                         juneNotification.text = data.pesan
                     }
                     4 -> {
+                        binding.notificationWrapper4.visibility = View.VISIBLE
                         mayNotification.text = data.pesan
-                    }
-                    5 -> {
-                        aprilNotification.text = data.pesan
                     }
                 }
             }
